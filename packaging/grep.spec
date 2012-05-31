@@ -5,6 +5,7 @@ Release: 61
 License: GPLv2+
 Group: Applications/Text
 Source: ftp://ftp.gnu.org/pub/gnu/grep/grep-%{version}.tar.bz2
+Source1001: packaging/grep.manifest 
 Patch0: grep-2.5.1-fgrep.patch
 Patch1: grep-2.5.1-bracket.patch
 Patch2: grep-2.5-i18n.patch
@@ -57,6 +58,7 @@ chmod a+x tests/fmbtest.sh
 chmod a+x tests/pcrewrap.sh
 
 %build
+cp %{SOURCE1001} .
 %configure --without-included-regex CPPFLAGS="-I%{_includedir}/pcre" --disable-nls
 make %{?_smp_mflags}
 
@@ -81,6 +83,7 @@ rm -rf ${RPM_BUILD_ROOT}
 %docs_package
 
 %files
+%manifest grep.manifest
 %defattr(-,root,root)
 %doc COPYING
 /bin/*
