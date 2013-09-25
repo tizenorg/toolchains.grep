@@ -69,6 +69,9 @@ mkdir -p $RPM_BUILD_ROOT/bin
 mv -f $RPM_BUILD_ROOT%{_bindir}/* $RPM_BUILD_ROOT/bin
 rm -rf $RPM_BUILD_ROOT%{_bindir}
 rm -rf $RPM_BUILD_ROOT%{_infodir}
+# license
+mkdir -p %{buildroot}/usr/share/license
+cp COPYING %{buildroot}/usr/share/license/%{name}
 
 # Use symlinks for egrep and fgrep
 ln -sf grep $RPM_BUILD_ROOT/bin/egrep
@@ -98,4 +101,4 @@ rm -rf ${RPM_BUILD_ROOT}
 %doc COPYING
 %{_datadir}/license/%{name}
 /bin/*
-
+/usr/share/license/%{name}
