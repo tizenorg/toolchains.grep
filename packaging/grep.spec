@@ -98,3 +98,4 @@ rm -rf ${RPM_BUILD_ROOT}
 %doc COPYING
 %{_datadir}/license/%{name}
 /bin/*
+
