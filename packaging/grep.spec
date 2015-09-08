@@ -1,11 +1,11 @@
 Summary: The GNU versions of grep pattern matching utilities
 Name: grep
 Version: 2.5.1a
-Release: 61
-License: GPLv2+
+Release: 63
+License: GPL-2.0+
 Group: Applications/Text
 Source: ftp://ftp.gnu.org/pub/gnu/grep/grep-%{version}.tar.bz2
-Source1001: packaging/grep.manifest 
+Source1001: packaging/grep.manifest
 Patch0: grep-2.5.1-fgrep.patch
 Patch1: grep-2.5.1-bracket.patch
 Patch2: grep-2.5-i18n.patch
@@ -74,6 +74,16 @@ rm -rf $RPM_BUILD_ROOT%{_infodir}
 ln -sf grep $RPM_BUILD_ROOT/bin/egrep
 ln -sf grep $RPM_BUILD_ROOT/bin/fgrep
 
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/license
+for keyword in LICENSE COPYING COPYRIGHT;
+do
+	for file in `find %{_builddir} -name $keyword`;
+	do
+		cat $file >> $RPM_BUILD_ROOT%{_datadir}/license/%{name};
+		echo "";
+	done;
+done
+
 %check
 make check
 
@@ -86,5 +96,6 @@ rm -rf ${RPM_BUILD_ROOT}
 %manifest grep.manifest
 %defattr(-,root,root)
 %doc COPYING
+%{_datadir}/license/%{name}
 /bin/*
 
